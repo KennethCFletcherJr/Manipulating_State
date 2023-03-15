@@ -1,14 +1,5 @@
-import './App.css';
-import { useState } from 'react'
-
-// Extra notes:
-// Both ways to do an incrementer: 
-// 1. const bestShowHandler = () => {setShow(show + 1)}   
-// 2. () => setShow(show+1)
-
-
 //PART ONE: (INCREMENT)
-//1. Go over the 5 sections of a react function ex: imports, name, variables and functions, return, exports
+//1. 5 sections of a react function ex: imports, name, variables and functions, return, exports
 //2. Check that return is displaying (favorite show among the class?)
 //3. Setup useState (3 important parts regarding state)
 //4. Setup the Syntehic Event Listeners (where the user interacts)
@@ -27,52 +18,48 @@ import { useState } from 'react'
 //3. Which event listener do we need
 //4. Write function to display the users review in real time
 
-//PART FOUR: (MAKE AN ALERT THAT IS INVOKED WHEN THE USER CLICKS THE POST BUTTON)
+//PART FOUR: (POST THE REVIEW TO AN ALERT POPUP THAT IS INVOKED WHEN THE USER CLICKS THE POST BUTTON)
 //1. Do we need anything new in our return?
 //2. Do we need any new state for an alert?
 //3. Write a function to post a message in an alert that simulates the user posting data to the db
 
+// ----------------------------------------------------------------
+import './App.css';
+import ReactTomatoes from './assets/tomatos.png'
+
 function App() {
 
-  const [show, setShow] = useState(0)
-  const [review, setReview] = useState("...awaiting it's first review")
-
-  const likeHandler = () => {
-    setShow(show + 1)
-  }
-
-  const dislikeHandler = () => {
-    if (show > 0) {
-      setShow(show - 1)
-    }
-  }
-
-  const reviewHandler = (e) => {
-    setReview(e.target.value)
-  }
-
-  const submitHandler = (e) => {
-    e.preventDefault()
-    alert(`The Office has ${show} likes. \n Your review says The Office is: ${review}.`)
-  }
-
-
-  //Go over 
   return (
-    <form onSubmit={submitHandler} className="App">
-      <div>
-        <h2>The Office has: {show} likes</h2>
-        <button type='button' onClick={likeHandler}>Like</button>
-        <button type='button' onClick={dislikeHandler}>Dislike</button>
+    <div className="App">
+      <div className="form-group">
+        <img id="tomato" src={ReactTomatoes} alt="rotten tomatos" />
+        <h1>ReactTomatoes</h1>
       </div>
-      <hr />
+
+      {/* Start Here */}
       <div>
-        <label>Write a review: </label>
-        <input type='text' onChange={reviewHandler} />
-        <h2>The Office is: {review}</h2>
+        <h2>Show Name:</h2>
+
+        <div id="count">
+          {/* mission: increment/decrement */}
+          {/* bonus: find and import a picture to represent our class show */}
+          let's build a counter!
+        </div>
+
+        <div id="review">
+          {/* mission: leave a review and display it in live time */}
+          {/* bonus: write validations that will pop up if review is less than 5 characters */}
+          let's build a review form!
+        </div>
+
+        <h2>Dashboard:</h2>
+        <div id="post">
+          {/* mission: post review to an alert popup when post button is clicked */}
+          {/* bonus: post review to dashboard */}
+          let's build a synthetic 'post'!
+        </div>
       </div>
-      <input type='submit' value='Post' />
-    </form>
+    </div>
   );
 }
 
