@@ -1,33 +1,33 @@
-//PART ONE: (INCREMENT)
-//1. 5 sections of a react function ex: imports, name, variables and functions, return, exports
-//2. Check that return is displaying (favorite show among the class?)
-//3. Setup useState (3 important parts regarding state)
-//4. Setup the Syntehic Event Listeners (where the user interacts)
-//5. Setup the result from the event (what the user sees)
-//6. Make the numbers increment (there are 2 main ways to do this)
-
-//PART TWO: (DECREMENT)
-//1. Do we need anything new in our return?
-//2. Do we need any new state?
-//3. Make the numbers decrement
-//4. BONUS: don't allow the likes number to go below zero
-
-//PART THREE: (WRITE REVIEW)
-//1. Do we need anything new in our return?
-//2. Do we need any new state?
-//3. Which event listener do we need
-//4. Write function to display the users review in real time
-
-//PART FOUR: (POST THE REVIEW TO AN ALERT POPUP THAT IS INVOKED WHEN THE USER CLICKS THE POST BUTTON)
-//1. Do we need anything new in our return?
-//2. Do we need any new state for an alert?
-//3. Write a function to post a message in an alert that simulates the user posting data to the db
-
-// ----------------------------------------------------------------
 import './App.css';
 import ReactTomatoes from './assets/tomatos.png'
+import { useState } from 'react'
 
 function App() {
+
+  const [likeCount, setLikeCount] = useState(0)
+  const [review, setReview] = useState("...awaiting review")
+  const [posts, setPosts] = useState([])
+
+  const increaseLikes = () => {
+    setLikeCount(prevState => prevState + 1)
+    console.log(likeCount)
+  }
+
+  const decreaseLikes = () => {
+    if (likeCount > 0) {
+      setLikeCount(prevState => prevState - 1)
+      console.log(likeCount)
+    }
+  }
+
+  const reviewHandler = (e) => {
+    setReview(e.target.value)
+  }
+
+  const postHandler = (e) => {
+    e.preventDefault()
+    setPosts([...posts, review])
+  }
 
   return (
     <div className="App">
@@ -37,28 +37,40 @@ function App() {
       </div>
 
       {/* Start Here */}
-      <div>
-        <h2>Show Name:</h2>
+      <form onSubmit={postHandler}>
+        <h2>Squid Games</h2>
+
 
         <div id="count">
           {/* mission: increment/decrement */}
           {/* bonus: find and import a picture to represent our class show */}
-          let's build a counter!
+          <p>Squid Games has: {likeCount} likes</p>
+          <button onClick={increaseLikes}>Like</button>
+          <button onClick={decreaseLikes}>Dislike</button>
         </div>
+
 
         <div id="review">
           {/* mission: leave a review and display it in live time */}
           {/* bonus: write validations that will pop up if review is less than 5 characters */}
-          let's build a review form!
+          <textarea cols={30} rows={5} name="review" onChange={reviewHandler} placeholder="write a review!"></textarea>
+          <p>{review}</p>
+          <input type="submit" value="Post"/>
         </div>
+
 
         <h2>Dashboard:</h2>
         <div id="post">
           {/* mission: post review to an alert popup when post button is clicked */}
           {/* bonus: post review to dashboard */}
-          let's build a synthetic 'post'!
+          <p>{posts}</p>
         </div>
-      </div>
+
+
+        <button>Toggle Post Section</button>
+        {/* bonus mission: when button is clicked, toggle the post section in and out of view */}
+
+      </form>
     </div>
   );
 }
